@@ -1,10 +1,5 @@
-# OMP keybindings. Each action lists every encoding the same physical key can
-# arrive as, because a terminal may translate a modifier before the shell sees it.
-#
-# Alt is the word modifier, Ctrl is the line modifier. The alt+b/f, ctrl+a/e,
-# ctrl+u/k, ctrl+w and alt+d entries are the emacs line-editor encodings of those
-# same keys. macOS cmux sends the emacs encodings for Option and Command (see
-# unix/cmux/cmux.json), and a Linux terminal sends the modifier forms.
+# Each action lists every encoding one key can arrive as: cmux sends emacs forms
+# (see unix/cmux/cmux.json), Linux terminals send modifier forms.
 tui.editor.cursorWordLeft: [alt+left, alt+b]
 tui.editor.cursorWordRight: [alt+right, alt+f]
 tui.editor.cursorLineStart: [ctrl+left, ctrl+a, home]
@@ -14,5 +9,4 @@ tui.editor.deleteWordForward: [alt+delete, alt+d]
 tui.editor.deleteToLineStart: [ctrl+backspace, ctrl+u]
 tui.editor.deleteToLineEnd: [ctrl+delete, ctrl+k]
 
-# Keep temporary model selection alongside the editor navigation bindings.
 app.model.selectTemporary: [Alt+P, Alt+O]

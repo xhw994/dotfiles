@@ -173,6 +173,9 @@ fi
 
 if [[ "$PLATFORM" != "windows" ]]; then
   MAPPINGS+=(
+    "auto|unix/omp/personal.yml|$HOME/.omp/agent/personal.yml"
+    "auto|unix/omp/hooks/pre/50-model-drift.ts|$HOME/.omp/agent/hooks/pre/50-model-drift.ts"
+    "auto|unix/zsh/omp-env.zsh|$HOME/.zshrc.d/40-omp-env.zsh"
     "auto|unix/tmux/tmux.conf|$HOME/.tmux.conf"
     "auto|unix/zsh/keybindings.zsh|$HOME/.zshrc.d/95-keybindings.zsh"
   )

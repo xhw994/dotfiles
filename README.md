@@ -3,7 +3,7 @@
 Personal configuration shared across Windows, macOS, and Linux.
 
 - `common/`: Starship, OMP, Bash/Readline, GitHub CLI, VS Code, and Cursor.
-- `unix/`: tmux and zsh keys, plus cmux/Ghostty keys for macOS.
+- `unix/`: tmux and zsh keys, the OMP model overlay, plus cmux/Ghostty keys for macOS.
 - `windows/`: Windows Terminal, PowerShell, OMP config, and manual Raycast snapshots.
 
 ## Apply only keys and prompt
@@ -20,12 +20,14 @@ The `workstation` profile owns:
 
 | Platform | Configuration |
 |---|---|
-| All | Starship and OMP keybindings |
-| macOS/Linux | tmux and `~/.zshrc.d/95-keybindings.zsh` |
+| All | Starship, and OMP keybindings and the model overlay (`~/.omp/agent/personal.yml`) |
+| macOS/Linux | tmux, `~/.zshrc.d/40-omp-env.zsh` and `~/.zshrc.d/95-keybindings.zsh` |
 | macOS | cmux, a Ghostty key include, and VS Code keybindings |
 | Windows | VS Code keybindings |
 
-It does **not** replace Bash profiles, Readline config, GitHub CLI config, VS Code settings/MCP, Cursor settings, Windows Terminal settings, or OMP provider/model configuration. The default `all` profile below retains those broader mappings, including the Windows Terminal `settings.json` copy, which replaces the whole file (profile list, default profile GUID, starting directory).
+It does **not** replace Bash profiles, Readline config, GitHub CLI config, VS Code settings/MCP, Cursor settings, Windows Terminal settings, or OMP's managed `~/.omp/agent/config.yml` and `models.yml`. The overlay carries model roles only: `40-omp-env.zsh` adds it to `PI_CONFIG_FILES` when the file exists, so Gohan's managed providers, `enabledModels`, and appearance settings stay authoritative and a missing or dangling overlay falls back to them instead of aborting omp.
+
+`unix/omp/hooks/pre/50-model-drift.ts` installs as an OMP pre-hook and reports the first main-session prompt after Gohan rewrites `config.yml`/`models.yml` or the catalog gains model ids. The notice lists changed baseline roles, `enabledModels` deltas, new model ids, and any overlay selector that no longer resolves; it repeats while an overlay selector is broken. Delete `~/.omp/agent/.model-drift.json` to re-baseline. The default `all` profile below retains those broader mappings, including the Windows Terminal `settings.json` copy, which replaces the whole file (profile list, default profile GUID, starting directory).
 
 Changed files are backed up under `~/.dotfiles-backup/` before replacement. Backups contain effective file content even when the old config was a symlink. Symlinks keep the personal repository as the source of truth; `DOTFILES_COPY_ONLY=1` uses copies instead.
 

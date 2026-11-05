@@ -1,0 +1,18 @@
+# Personal model roles, loaded via PI_CONFIG_FILES (see unix/zsh/omp-env.zsh).
+# Overlay values win over Gohan's managed ~/.omp/agent/config.yml.
+modelRoles:
+  default: instacart-anthropic/claude-sonnet-5-5@default:high
+  smol: open-weights/deepseek-v4p1-flash-priority:low
+  slow: instacart-openai/gpt-6.1-sol:max
+  plan: instacart-anthropic/claude-opus-5-5@default:xhigh
+  designer: instacart-openai/gpt-6.1-sol:xhigh
+  task: open-weights/deepseek-v4p1-flash-priority:high
+  commit: open-weights/deepseek-v4p1-flash-priority:low
+  vision: instacart-openai/gpt-6-luna:medium
+  tiny: instacart-openai/gpt-6-luna:low
+  advisor: instacart-openai/gpt-6.1-sol:xhigh
+retry:
+  fallbackChains:
+    default:
+      - instacart-openai/gpt-6.1-sol:high
+      - open-weights/deepseek-v4p1-flash-priority:high
